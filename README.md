@@ -4,4 +4,6 @@
 `author` and `book`.
 A author have a list of books, a book belongs to a single author.
 
-### By using GraphQL, querying data from resources become easy
+### By using GraphQL, querying data from resources become easy:
+
+
