@@ -11,13 +11,13 @@ const {
 const app = express();
 const PORT = 5000;
 
-const authors = [
+let authors = [
   {id:1, name:"Jeffrey"},
   {id:2, name:"Aaron"},
   {id:3, name:"Stephan"}
 ]
 
-const books=[
+let books=[
   {id:1, name:"Harry Potter", authorId:1},
   {id:2, name:"Good Day", authorId:1},
   {id:3, name:"We survived", authorId:1},
@@ -157,6 +157,30 @@ const RootMutationType = new GraphQLObjectType({
         return author
       }
     },
+    deleteAuthor:{
+      type: AuthorType,
+      description:"delete a author",
+      args:{
+        id: {type: GraphQLNonNull(GraphQLInt) }
+      },
+      resolve:(parent, args)=>{
+        const deleteAuthor = authors.find(author=> author.id == args.id);
+        authors = authors.filter(author =>author.name!== deleteAuthor.name);
+        return deleteAuthor;
+      }
+    },
+    deleteBook:{
+      type: BookType,
+      description:"delete a book",
+      args:{
+        id: {type: GraphQLNonNull(GraphQLInt) }
+      },
+      resolve:(parent, args)=>{
+        const deleteBook = books.find(book=> book.id == args.id);
+        books = books.filter(book =>book.name!== deleteBook.name);
+        return deleteBook;
+      }
+    }
 
    })
 })
